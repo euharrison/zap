@@ -1,5 +1,6 @@
 <html>
   <head>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       body {
@@ -72,6 +73,12 @@
 
       const updateLink = (tel) => {
         tel = tel.replace(/[^0-9]/g, "");
+        if (tel.length < 10) {
+          tel = `21${tel}`;
+        }
+        if (tel.length < 12) {
+          tel = `55${tel}`;
+        }
         link.href = `https://wa.me/${tel}`;
       };
 
