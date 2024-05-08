@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+      }
+      .title {
+        color: #118c7e;
+        font-size: 20px;
+        font-weight: 400;
+        margin: 0;
+      }
+      .input {
+        padding: 10px 15px;
+        width: 100%;
+        border: 1px solid #118c7e;
+        border-radius: 8px;
+        outline: none;
+      }
+      .chat {
+        padding: 10px 25px;
+        font-size: 14px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        background-color: #118c7e;
+        border: 0;
+        border-radius: 8px;
+        outline: none;
+        cursor: pointer;
+      }
+      .chat:hover {
+        background-color: #24d366;
+      }
+      .paste {
+        color: #666;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      .paste:hover {
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Digite o número do WhatsApp</h1>
+      <input class="input" />
+      <a class="chat" href="https://wa.me" target="_blank">Iniciar conversa</a>
+      <button class="paste">copiou o número?</button>
+    </div>
+    <script>
+      const input = document.querySelector(".input");
+      const link = document.querySelector(".chat");
+      const paste = document.querySelector(".paste");
+
+      const updateLink = (tel) => {
+        tel = tel.replace(/[^0-9]/g, "");
+        link.href = `https://wa.me/${tel}`;
+      };
+
+      input.focus();
+      input.addEventListener("input", (e) => {
+        const tel = e.target.value;
+        updateLink(tel);
+      });
+
+      paste.addEventListener("click", async () => {
+        const text = await navigator.clipboard.readText();
+        input.value = text;
+        updateLink(input.value);
+      });
+    </script>
+  </body>
+</html>
